@@ -67,6 +67,16 @@ export default async function SignupPage({
                 required
               />
             </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="confirm_password">Confirmar contraseña</Label>
+              <Input
+                id="confirm_password"
+                name="confirm_password"
+                type="password"
+                minLength={6}
+                required
+              />
+            </div>
             {error && (
               <p className="text-sm text-destructive">{error}</p>
             )}

@@ -35,11 +35,18 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirm_password") as string;
   const fullName = formData.get("full_name") as string;
   const role = formData.get("role") as string;
 
   if (role !== "candidato" && role !== "empresa") {
-    redirect("/signup?error=Rol%20inválido");
+    redirect(`/signup?error=${encodeURIComponent("Rol inválido")}`);
+  }
+
+  if (password !== confirmPassword) {
+    redirect(
+      `/signup?error=${encodeURIComponent("Las contraseñas no coinciden")}`,
+    );
   }
 
   const supabase = await createClient();
